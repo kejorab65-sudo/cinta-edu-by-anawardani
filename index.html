@@ -133,7 +133,7 @@ table{width:100%;border-collapse:collapse;font-size:12px}th,td{border:1px solid 
 const home=document.getElementById('home'), gen=document.getElementById('gen'), assessment=document.getElementById('assessment'), reg=document.getElementById('reg'), regbody=document.getElementById('regbody');
 const approach=document.getElementById('approach'), jenjang=document.getElementById('jenjang'), kelas=document.getElementById('kelas'), fase=document.getElementById('fase'), mapel=document.getElementById('mapel'), materi=document.getElementById('materi');
 const tahun=document.getElementById('tahun'), sekolah=document.getElementById('sekolah'), penyusun=document.getElementById('penyusun'), kepala=document.getElementById('kepala');
-const model=document.getElementById('model'), methods=document.getElementById('methods'), dpl=document.getElementById('dpl'), panca=document.getElementById('panca'), ses=document.getElementById('ses'), syntax=document.getElementById('syntax');
+const model=document.getElementById('model'), methods=document.getElementById('methods'), dpl=document.getElementById('dpl'), panca=document.getElementById('panca'), ses=document.getElementById('ses'), syntaxBox=document.getElementById('syntax');
 const meet=document.getElementById('meet'), jp=document.getElementById('jp'), total=document.getElementById('total'), dur=document.getElementById('dur');
 const cpstatus=document.getElementById('cpstatus'), cptext=document.getElementById('cptext'), rule=document.getElementById('rule'), output=document.getElementById('output');
 
@@ -151,7 +151,15 @@ const REG={"regulations": [{"code": "046/H/KR/2025", "authority": "BSKAP Kemendi
 const phases={1:'A',2:'A',3:'B',4:'B',5:'C',6:'C',7:'D',8:'D',9:'D',10:'E',11:'F',12:'F'};
 const mapToDB={'Koding/TIK':'Informatika','Seni Rupa':'Seni Rupa','Seni Musik':'Seni Musik','Seni Tari':'Seni Tari','Seni Teater':'Seni Teater'};
 const qs=s=>[...document.querySelectorAll(s+':checked')].map(x=>x.value);
-function start(){home.classList.add('hidden');gen.classList.remove('hidden');fill();phase();rules();calc()}
+function start(){
+  home.classList.add('hidden');
+  gen.classList.remove('hidden');
+  fill();
+  phase();
+  rules();
+  calc();
+}
+
 function fill(){for(let i=1;i<=12;i++)kelas.innerHTML+=`<option>${i}</option>`;let y=new Date().getFullYear();for(let i=0;i<5;i++)tahun.innerHTML+=`<option>${y+i}/${y+i+1}</option>`;Object.keys(DB.subjects).forEach(x=>{});['Project Based Learning (PjBL)','Problem Based Learning (PBL)','Discovery Learning','Inquiry Based Learning','Cooperative Learning','Differentiated Learning','Contextual Teaching and Learning','Blended Learning','Deep Learning Model'].forEach(x=>model.innerHTML+=`<option>${x}</option>`);['Diskusi','Tanya jawab','Presentasi','Praktikum','Demonstrasi','Ceramah','Penugasan','Simulasi','Think Pair Share'].forEach(x=>methods.innerHTML+=`<label class=chip><input type=checkbox value="${x}">${x}</label>`);['Keimanan dan Ketakwaan','Kewargaan','Penalaran Kritis','Kreativitas','Kolaborasi','Kemandirian','Komunikasi','Kesehatan'].forEach(x=>dpl.innerHTML+=`<label class=chip><input type=checkbox value="${x}">${x}</label>`);['Cinta Allah & Rasul-Nya','Cinta Ilmu','Cinta Lingkungan','Cinta Diri & Sesama','Cinta Tanah Air'].forEach(x=>panca.innerHTML+=`<label class=chip><input type=checkbox value="${x}">${x}</label>`);['Kesadaran diri','Pengelolaan diri','Kesadaran sosial','Keterampilan berelasi','Pengambilan keputusan bertanggung jawab'].forEach(x=>ses.innerHTML+=`<label class=chip><input type=checkbox value="${x}">${x}</label>`);model.onchange=syntax}
 function phase(){fase.value=phases[kelas.value]||'';cpLookup()}
 function normalizeMapel(x){const m={"al quran hadist":"Al-Qur'an Hadis","al-quran hadist":"Al-Qur'an Hadis","Al Quran Hadis":"Al-Qur'an Hadis"};return m[x]||x}
@@ -171,7 +179,7 @@ function cpLookup(){
  }
 }
 function rules(){let a=approach.value;rule.innerHTML=a==='merdeka'?'<b>Kurikulum Merdeka:</b> CP + Pembelajaran Mendalam + 8 Dimensi + asesmen diagnostik/formatif/sumatif.':a==='kbc'?'<b>KBC:</b> Panca Cinta + FIDS/ARKA + SES + uswah hasanah + penilaian holistik + muhasabah.':'<b>Hybrid:</b> Kerangka Kurikulum Merdeka/Pembelajaran Mendalam dipadukan dengan nilai Panca Cinta, FIDS/ARKA, dan SES.'}
-function syntax(){let m=model.value;let a={'Project Based Learning (PjBL)':'Pertanyaan mendasar → desain proyek → jadwal → monitor → uji hasil → evaluasi','Problem Based Learning (PBL)':'Orientasi masalah → organisasi → penyelidikan → penyajian → evaluasi','Discovery Learning':'Stimulation → Problem Statement → Data Collection → Data Processing → Verification → Generalization','Inquiry Based Learning':'Orientasi → rumusan masalah → hipotesis → data → uji hipotesis → kesimpulan','Cooperative Learning':'Tujuan → informasi → kelompok → bimbingan → evaluasi → penghargaan','Differentiated Learning':'Asesmen kesiapan/minat/profil → diferensiasi → pembelajaran adaptif → umpan balik → refleksi','Contextual Teaching and Learning':'Konstruktivisme → inkuiri → bertanya → masyarakat belajar → pemodelan → refleksi → autentik','Blended Learning':'Orientasi → tatap muka → digital → kolaborasi → umpan balik → refleksi','Deep Learning Model':'Memahami → mengaplikasi → merefleksi'};syntax.innerHTML='<b>Sintaks:</b> '+a[m]}
+function syntax(){let m=model.value;let a={'Project Based Learning (PjBL)':'Pertanyaan mendasar → desain proyek → jadwal → monitor → uji hasil → evaluasi','Problem Based Learning (PBL)':'Orientasi masalah → organisasi → penyelidikan → penyajian → evaluasi','Discovery Learning':'Stimulation → Problem Statement → Data Collection → Data Processing → Verification → Generalization','Inquiry Based Learning':'Orientasi → rumusan masalah → hipotesis → data → uji hipotesis → kesimpulan','Cooperative Learning':'Tujuan → informasi → kelompok → bimbingan → evaluasi → penghargaan','Differentiated Learning':'Asesmen kesiapan/minat/profil → diferensiasi → pembelajaran adaptif → umpan balik → refleksi','Contextual Teaching and Learning':'Konstruktivisme → inkuiri → bertanya → masyarakat belajar → pemodelan → refleksi → autentik','Blended Learning':'Orientasi → tatap muka → digital → kolaborasi → umpan balik → refleksi','Deep Learning Model':'Memahami → mengaplikasi → merefleksi'};syntaxBox.innerHTML='<b>Sintaks:</b> '+a[m]}
 function calc(){total.value=(+meet.value||0)*(+jp.value||0)+' JP'}
 function registry(){home.classList.add('hidden');reg.classList.remove('hidden');regbody.innerHTML=REG.regulations.map(r=>`<div class=card><b>${r.code}</b><br>${r.authority}<br>${r.scope}<br><span class=small>Status: ${r.status}</span></div>`).join('')}
 function back(){reg.classList.add('hidden');home.classList.remove('hidden')}
@@ -238,7 +246,7 @@ function generate(){
  const cp=CPDB_FULL_V19[s]?.[fase.value]||'CP belum tersedia untuk kombinasi mapel dan fase ini.';
  const source=CP_SOURCE[s]||'Sumber CP sesuai database regulasi aplikasi';
  const readiness=makeReadiness(s,fase.value,topic,target), love=makeLove(topic,panca,ses,approach.value), character=makeCharacter(s,fase.value,topic);
- const modelName=model.value, syntaxText=syntax.innerText.replace(/^Sintaks:\s*/,'');
+ const modelName=model.value, syntaxText=syntaxBox.innerText.replace(/^Sintaks:\s*/,'');
  const pertemuan=Math.max(1,parseInt(total.value||1)/Math.max(1,parseInt(jp.value||1)));
  const durasi=dur.value||45;
  const pancaText=panca.length?panca.map(x=>`<span class="pill">${x}</span>`).join(' '):'Tidak dipilih';

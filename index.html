@@ -139,7 +139,7 @@ const CPDB_FULL_V19={"Pendidikan Pancasila":{"A":"1.​ Fase A (Umumnya untuk Ke
 for(const [subject,phases] of Object.entries(CPDB_FULL_V19)){
   DB.subjects[subject]=Object.fromEntries(Object.entries(phases).map(([ph,text])=>[ph,text]));
 }
-const CP_SOURCE_V17={"IPAS": "Keputusan Kepala BSKAP Nomor 046/H/KR/2025", "Matematika": "Keputusan Kepala BSKAP Nomor 046/H/KR/2025", "Bahasa Indonesia": "Keputusan Kepala BSKAP Nomor 046/H/KR/2025", "Pendidikan Pancasila": "Keputusan Kepala BSKAP Nomor 046/H/KR/2025", "PJOK": "Keputusan Kepala BSKAP Nomor 046/H/KR/2025", "Bahasa Inggris": "Keputusan Kepala BSKAP Nomor 046/H/KR/2025", "Seni Rupa": "Keputusan Kepala BSKAP Nomor 046/H/KR/2025", "Seni Musik": "Keputusan Kepala BSKAP Nomor 046/H/KR/2025", "Seni Tari": "Keputusan Kepala BSKAP Nomor 046/H/KR/2025", "Seni Teater": "Keputusan Kepala BSKAP Nomor 046/H/KR/2025", "Koding/TIK": "Keputusan Kepala BSKAP Nomor 046/H/KR/2025 — Koding dan Kecerdasan Artifisial", "Al-Qur'an Hadis": "SK Dirjen Pendis Nomor 9941 Tahun 2025", "Akidah Akhlak": "SK Dirjen Pendis Nomor 9941 Tahun 2025", "Fikih": "SK Dirjen Pendis Nomor 9941 Tahun 2025", "SKI": "SK Dirjen Pendis Nomor 9941 Tahun 2025", "Bahasa Arab": "SK Dirjen Pendis Nomor 9941 Tahun 2025"};
+const CP_SOURCE={"IPAS": "Keputusan Kepala BSKAP Nomor 046/H/KR/2025", "Matematika": "Keputusan Kepala BSKAP Nomor 046/H/KR/2025", "Bahasa Indonesia": "Keputusan Kepala BSKAP Nomor 046/H/KR/2025", "Pendidikan Pancasila": "Keputusan Kepala BSKAP Nomor 046/H/KR/2025", "PJOK": "Keputusan Kepala BSKAP Nomor 046/H/KR/2025", "Bahasa Inggris": "Keputusan Kepala BSKAP Nomor 046/H/KR/2025", "Seni Rupa": "Keputusan Kepala BSKAP Nomor 046/H/KR/2025", "Seni Musik": "Keputusan Kepala BSKAP Nomor 046/H/KR/2025", "Seni Tari": "Keputusan Kepala BSKAP Nomor 046/H/KR/2025", "Seni Teater": "Keputusan Kepala BSKAP Nomor 046/H/KR/2025", "Koding/TIK": "Keputusan Kepala BSKAP Nomor 046/H/KR/2025 — Koding dan Kecerdasan Artifisial", "Al-Qur'an Hadis": "SK Dirjen Pendis Nomor 9941 Tahun 2025", "Akidah Akhlak": "SK Dirjen Pendis Nomor 9941 Tahun 2025", "Fikih": "SK Dirjen Pendis Nomor 9941 Tahun 2025", "SKI": "SK Dirjen Pendis Nomor 9941 Tahun 2025", "Bahasa Arab": "SK Dirjen Pendis Nomor 9941 Tahun 2025"};
 const REG={"regulations": [{"code": "046/H/KR/2025", "authority": "BSKAP Kemendikdasmen", "scope": "CP PAUD, SD/MI, SMP/MTs, SMA/MA, SMK/MAK, Paket, dan pendidikan khusus", "status": "terintegrasi untuk mapel umum"}, {"code": "9941/2025", "authority": "Direktorat Jenderal Pendidikan Islam Kemenag", "scope": "CP PAI dan Bahasa Arab pada madrasah", "status": "siap diintegrasikan setelah sumber dokumen dimasukkan"}, {"code": "6077/2025", "authority": "Direktorat Jenderal Pendidikan Islam Kemenag", "scope": "Panduan Kurikulum Berbasis Cinta", "status": "aturan KBC terintegrasi"}]};
 const phases={1:'A',2:'A',3:'B',4:'B',5:'C',6:'C',7:'D',8:'D',9:'D',10:'E',11:'F',12:'F'};
 const mapToDB={'Koding/TIK':'Informatika','Seni Rupa':'Seni Rupa','Seni Musik':'Seni Musik','Seni Tari':'Seni Tari','Seni Teater':'Seni Teater'};
@@ -149,8 +149,8 @@ function fill(){for(let i=1;i<=12;i++)kelas.innerHTML+=`<option>${i}</option>`;l
 function phase(){fase.value=phases[kelas.value]||'';cpLookup()}
 function normalizeMapel(x){const m={"al quran hadist":"Al-Qur'an Hadis","al-quran hadist":"Al-Qur'an Hadis","Al Quran Hadis":"Al-Qur'an Hadis"};return m[x]||x}
 function cpLookup(){
- const subject=normalizeMapel(mapel.value),ph=fase.value,source=CP_SOURCE_V17[subject]||"CP sesuai regulasi";
- const rec=CPDB_V17[subject]&&CPDB_V17[subject][ph];
+ const subject=normalizeMapel(mapel.value),ph=fase.value,source=CP_SOURCE[subject]||"CP sesuai regulasi";
+ const rec=CPDB_FULL_V19[subject]&&CPDB_FULL_V19[subject][ph];
  if(rec){
    cpstatus.className="notice ok";
    cpstatus.innerHTML=`<b>CP ditemukan otomatis.</b><br>Sumber: ${source} · ${subject} · Fase ${ph}`;
@@ -228,8 +228,8 @@ function makeCharacter(subject,phase,topic){
 function generate(){
  const s=normalizeMapel(mapel.value), topic=materi.value||'[Materi/Topik]';
  const target=selectedTarget(), panca=selectedChips('panca'), ses=selectedChips('ses'), dpl=selectedChips('dpl'), methods=selectedChips('methods');
- const cp=CPDB_V17[s]?.[fase.value]||'CP belum tersedia untuk kombinasi mapel dan fase ini.';
- const source=CP_SOURCE_V17[s]||'Sumber CP sesuai database regulasi aplikasi';
+ const cp=CPDB_FULL_V19[s]?.[fase.value]||'CP belum tersedia untuk kombinasi mapel dan fase ini.';
+ const source=CP_SOURCE[s]||'Sumber CP sesuai database regulasi aplikasi';
  const readiness=makeReadiness(s,fase.value,topic,target), love=makeLove(topic,panca,ses,approach.value), character=makeCharacter(s,fase.value,topic);
  const modelName=model.value, syntaxText=syntax.innerText.replace(/^Sintaks:\s*/,'');
  const pertemuan=Math.max(1,parseInt(total.value||1)/Math.max(1,parseInt(jp.value||1)));

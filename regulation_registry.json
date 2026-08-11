@@ -1,0 +1,22 @@
+{
+  "regulations": [
+    {
+      "code": "046/H/AN/2025",
+      "authority": "BSKAP Kemendikdasmen",
+      "scope": "CP PAUD, SD/MI, SMP/MTs, SMA/MA, SMK/MAK, Paket, dan pendidikan khusus",
+      "status": "terintegrasi untuk mapel umum"
+    },
+    {
+      "code": "9941/2025",
+      "authority": "Direktorat Jenderal Pendidikan Islam Kemenag",
+      "scope": "CP PAI dan Bahasa Arab pada madrasah",
+      "status": "siap diintegrasikan setelah sumber dokumen dimasukkan"
+    },
+    {
+      "code": "6077/2025",
+      "authority": "Direktorat Jenderal Pendidikan Islam Kemenag",
+      "scope": "Panduan Kurikulum Berbasis Cinta",
+      "status": "aturan KBC terintegrasi"
+    }
+  ]
+}

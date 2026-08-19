@@ -1,30 +1,178 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CINTA EDU — Ana Wardani</title>
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Generator Modul Ajar by Ana Wardani</title>
 <style>
-body{font-family:Arial,sans-serif;margin:0;background:#f4f7f5;color:#18322d}header{background:#176b5b;color:white;padding:30px}nav{padding:14px;background:white;display:flex;gap:8px;flex-wrap:wrap}button{padding:10px 15px;border:0;border-radius:8px;background:#176b5b;color:white;cursor:pointer}.view{display:none;max-width:1100px;margin:20px auto;padding:20px;background:white;border-radius:14px}.active{display:block}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}fieldset{margin:15px 0;padding:16px;border:1px solid #ccd9d4;border-radius:12px}label{display:block;font-weight:bold;margin:9px 0 5px}input,select,textarea{width:100%;padding:9px;border:1px solid #ccd9d4;border-radius:7px;box-sizing:border-box}.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:7px}.checks label{font-weight:normal}.checks input{width:auto}.out{margin-top:20px;border-top:3px solid #d9a441;padding-top:20px}h2{color:#176b5b}table{width:100%;border-collapse:collapse}td,th{border:1px solid #ccd9d4;padding:8px;text-align:left}th{background:#edf4f1}@media print{header,nav,.no-print{display:none}.view{display:none}.module{display:block!important}}
-</style></head><body>
-<header><h1>🌿 CINTA EDU</h1><p>Generator RPP / Modul Pembelajaran Mendalam & Kurikulum Berbasis Cinta — <b>by Ana Wardani</b></p></header>
-<nav><button onclick="show('home')">🏠 Beranda</button><button onclick="show('module')">📘 Generate Modul Ajar</button><button onclick="show('assessment')">📊 Generate Asesmen</button><button onclick="show('reg')">📚 Regulasi</button></nav>
-<section id="home" class="view active"><h2>Selamat datang</h2><p>Prototype CINTA EDU menggunakan kerangka RPP PM KBC yang Anda lampirkan.</p><div class="grid"><div><h3>📘 Modul Ajar</h3><p>Spesifikasi → Identifikasi → Desain → Pengalaman Belajar → Asesmen → Lampiran.</p><button onclick="show('module')">Mulai</button></div><div><h3>📊 Asesmen</h3><p>Asesmen diagnostik, formatif, sumatif, refleksi dan HOTS.</p><button onclick="show('assessment')">Mulai</button></div></div></section>
-<section id="module" class="view module"><h2>Generate RPP / Modul PM–KBC</h2><form id="f">
-<fieldset><legend>A. Spesifikasi</legend><div class="grid">
-<div><label>Nama Madrasah</label><input id="school" required></div><div><label>Mata Pelajaran</label><select id="subject"><option>Al-Qur'an Hadis</option><option>Akidah Akhlak</option><option>Fikih</option><option>SKI</option><option>Bahasa Arab</option><option>Pendidikan Pancasila</option><option>Bahasa Indonesia</option><option>Matematika</option><option>IPAS</option><option>PJOK</option><option>Seni Rupa</option><option>Seni Musik</option><option>Seni Tari</option><option>Seni Drama</option><option>Bahasa Inggris</option><option>Koding/TIK</option></select></div>
-<div><label>Jenjang</label><select id="level"><option>SD/MI</option><option>SMP/MTs</option><option>SMA/MA</option></select></div><div><label>Kelas</label><select id="grade"></select></div><div><label>Fase</label><input id="phase" readonly></div><div><label>Semester</label><select id="semester"><option>Ganjil</option><option>Genap</option></select></div><div><label>Materi/Topik</label><input id="topic" required></div><div><label>Alokasi Waktu</label><input id="time" placeholder="Contoh: 4 JP (2 pertemuan)"></div></div></fieldset>
-<fieldset><legend>B. Identifikasi</legend><label>Target Peserta Didik</label><select id="target"><option>Reguler (semua peserta didik)</option><option>CIBI</option><option>ABK</option><option>Remedial</option><option>Campuran (diferensiasi)</option></select><label>Asesmen Awal</label><textarea id="diag"></textarea><label>8 Dimensi Profil Lulusan</label><div id="dpl" class="checks"></div><label>Topik Panca Cinta</label><div id="panca" class="checks"></div><label>SES</label><div id="ses" class="checks"></div><label>Materi Integrasi KBC</label><textarea id="kbc"></textarea></fieldset>
-<fieldset><legend>C. Desain Pembelajaran</legend><label>Pendekatan</label><select id="approach"><option>Kurikulum Merdeka</option><option>Kurikulum Berbasis Cinta</option><option>Hybrid (Kurikulum Merdeka + KBC)</option></select><label>Model Pembelajaran</label><select id="model"><option>Project Based Learning (PjBL)</option><option>Problem Based Learning (PBL)</option><option>Discovery Learning</option><option>Inquiry Based Learning</option><option>Cooperative Learning</option><option>Differentiated Learning</option><option>Contextual Teaching and Learning</option><option>Blended Learning</option><option>Deep Learning Model</option></select><label>Metode</label><div id="methods" class="checks"></div><label>Strategi</label><textarea id="strategy"></textarea><label>Kemitraan</label><textarea id="partner"></textarea><label>Lingkungan Pembelajaran</label><textarea id="env"></textarea><label>Pemanfaatan Digital</label><textarea id="digital"></textarea></fieldset>
-<fieldset><legend>Alokasi & Penyusun</legend><div class="grid"><div><label>Jumlah Pertemuan</label><input id="meet" type="number" value="1"></div><div><label>JP/Pertemuan</label><input id="jp" type="number" value="2"></div><div><label>Durasi/JP</label><select id="dur"><option>30 menit</option><option selected>35 menit</option><option>40 menit</option><option>45 menit</option><option>60 menit</option></select></div><div><label>Tahun Pelajaran</label><input id="year"></div><div><label>Nama Penyusun</label><input id="author" value="Ana Wardani"></div><div><label>Kepala Madrasah</label><input id="principal"></div></div></fieldset>
-<button type="submit">✨ Buat Modul Ajar</button> <button type="button" onclick="window.print()">🖨️ Cetak</button></form><div id="out" class="out"></div></section>
-<section id="assessment" class="view"><h2>Generator Asesmen</h2><p>Prototype asesmen yang mengikuti struktur template: proses, akhir, as/for/of learning, refleksi, dan HOTS.</p><input id="atopic" placeholder="Materi/topik"><button onclick="assess()">Buat Asesmen</button><div id="aout"></div></section>
-<section id="reg" class="view"><h2>Registry Regulasi</h2><table><tr><th>Regulasi</th><th>Peran</th></tr><tr><td>BSKAP No. 046/H/KR/2025</td><td>Basis kurikulum/CP mapel umum sesuai sumber yang diberikan.</td></tr><tr><td>SK Dirjen Pendis No. 9941 Tahun 2025</td><td>Basis CP mapel agama dan Bahasa Arab sesuai sumber yang diberikan.</td></tr><tr><td>Keputusan Dirjen Pendidikan Islam No. 6077/2025</td><td>Basis Kurikulum Berbasis Cinta dan Panca Cinta.</td></tr><tr><td>Permendikdasmen No. 1/2026</td><td>Prinsip Pembelajaran Mendalam.</td></tr></table></section>
+:root{--green:#166534;--light:#f4f8f4;--line:#d8e3da;--text:#18301f;--muted:#65736a;--gold:#f59e0b}
+*{box-sizing:border-box}body{margin:0;background:var(--light);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+header{background:linear-gradient(135deg,#14532d,#15803d);color:#fff;padding:24px 5%;position:sticky;top:0;z-index:9;box-shadow:0 3px 16px #0002}
+.brand{font-size:24px;font-weight:800}.brand small{display:block;font-size:12px;font-weight:500;opacity:.9;margin-top:3px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}nav button{border:1px solid #fff6;background:#fff1;color:#fff;padding:9px 13px;border-radius:10px;cursor:pointer}nav button.active{background:#fff;color:var(--green)}
+main{max-width:1180px;margin:28px auto;padding:0 16px}.page{display:none}.page.active{display:block}
+.hero,.card,.result{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:18px;box-shadow:0 5px 18px #15301b0a}
+.hero h1{margin:0 0 8px}.hero p{color:var(--muted);line-height:1.6}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.grid3{grid-template-columns:repeat(3,minmax(0,1fr))}
+label{font-size:13px;font-weight:700;display:block;margin-bottom:6px}.field{margin-bottom:12px}
+input,select,textarea{width:100%;padding:10px 12px;border:1px solid #cbd8ce;border-radius:10px;background:#fff;font:inherit}textarea{min-height:95px;resize:vertical}
+.checkgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.check{border:1px solid var(--line);border-radius:10px;padding:9px;background:#fbfdfb}.check input{width:auto;margin-right:7px}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}button.primary,button.secondary,button.warning{border:0;border-radius:10px;padding:11px 16px;font-weight:700;cursor:pointer}button.primary{background:var(--green);color:#fff}button.secondary{background:#e7efe9;color:#164126}button.warning{background:#fff1d6;color:#754a00}
+.note{background:#fff8e7;border-left:4px solid var(--gold);padding:12px;border-radius:8px;color:#624a19;line-height:1.5}.badge{display:inline-block;background:#e8f4eb;color:#166534;border-radius:999px;padding:4px 9px;font-size:12px;font-weight:700;margin:2px}
+.result{line-height:1.65}.result table{border-collapse:collapse;width:100%;margin:12px 0}.result th,.result td{border:1px solid #ccd8ce;padding:8px;vertical-align:top}.result th{background:#eef5ef}.small{font-size:12px;color:var(--muted)}
+@media(max-width:760px){.grid,.grid3,.checkgrid{grid-template-columns:1fr}}
+@media print{header,.no-print{display:none!important}body{background:#fff}.page{display:none!important}#printPage{display:block!important}.result{box-shadow:none;border:0}}
+</style>
+</head>
+<body>
+<header>
+<div class="brand">Generator Modul Ajar <small>by Ana Wardani • Kurikulum Berbasis Cinta • Deep Learning • Ekoteologi-STEM</small></div>
+<nav>
+<button class="active" onclick="page('home',this)">Beranda</button>
+<button onclick="page('generator',this)">Generate Modul Ajar</button>
+<button onclick="page('assessment',this)">Generator Asesmen</button>
+<button onclick="page('about',this)">Tentang</button>
+</nav>
+</header>
+<main>
+
+<section id="home" class="page active">
+<div class="hero"><h1>Generator Modul Ajar Kurikulum Berbasis Cinta</h1>
+<p>Versi revisi 3.1 untuk membantu guru menyusun modul ajar yang terstruktur, kontekstual, dan selaras dengan model pembelajaran yang dipilih.</p>
+<div class="actions"><button class="primary" onclick="page('generator',document.querySelectorAll('nav button')[1])">Mulai Membuat Modul</button></div></div>
+<div class="grid grid3">
+<div class="card"><b>CP Adaptif</b><p class="small">CP disesuaikan dengan mata pelajaran dan fase.</p></div>
+<div class="card"><b>Sintaks Otomatis</b><p class="small">Kegiatan inti mengikuti sintaks PjBL, PBL, Discovery, Inquiry, Cooperative, Differentiated, CTL, Blended, atau Deep Learning.</p></div>
+<div class="card"><b>KBC + Deep Learning</b><p class="small">Panca Cinta, SEL, 8 dimensi profil lulusan, prinsip, pengalaman belajar, dan Ekoteologi-STEM terintegrasi.</p></div>
+</div>
+</section>
+
+<section id="generator" class="page">
+<div class="hero"><h1>Generate Modul Ajar</h1><p>Lengkapi data berikut, kemudian klik <b>Buat Modul Ajar</b>.</p></div>
+
+<div class="card"><h3>A. Identitas Modul</h3><div class="grid">
+<div class="field"><label>Madrasah/Satuan Pendidikan</label><input id="madrasah" value="MIN 6 Magelang"></div>
+<div class="field"><label>Guru/Penyusun</label><input id="guru" value="Ana Wardani, S.Pd.I"></div>
+<div class="field"><label>Mata Pelajaran</label><select id="mapel" onchange="sync()">
+<option>IPAS</option><option>Bahasa Indonesia</option><option>Matematika</option><option>Pendidikan Pancasila</option><option>Bahasa Jawa</option><option>Fikih</option><option>Al-Qur'an Hadis</option><option>Akidah Akhlak</option><option>SKI</option><option>Bahasa Arab</option><option>English</option>
+</select></div>
+<div class="field"><label>Kelas</label><select id="kelas" onchange="sync()">
+<option>1</option><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>
+</select></div>
+<div class="field"><label>Fase</label><input id="fase" readonly></div>
+<div class="field"><label>Semester</label><select id="semester"><option>Ganjil</option><option>Genap</option></select></div>
+<div class="field"><label>Alokasi Waktu</label><input id="alokasi" value="2 × 35 menit"></div>
+<div class="field"><label>Materi/Topik</label><input id="materi" value="Perubahan Bentuk Energi"></div>
+</div>
+<div class="field"><label>Kondisi/Kebutuhan Peserta Didik</label><textarea id="target">Kemampuan dan pengalaman awal peserta didik beragam sehingga diperlukan pembelajaran kontekstual dan berdiferensiasi.</textarea></div>
+</div>
+
+<div class="card"><h3>B. Komponen Pembelajaran</h3><div class="grid">
+<div class="field"><label>Model Pembelajaran</label><select id="model" onchange="syntax()">
+<option>Project Based Learning (PjBL)</option><option>Problem Based Learning (PBL)</option><option>Discovery Learning</option><option>Inquiry Based Learning</option><option>Cooperative Learning</option><option>Differentiated Learning</option><option>Contextual Teaching and Learning (CTL)</option><option>Blended Learning</option><option>Deep Learning</option>
+</select></div>
+<div class="field"><label>Pendekatan</label><select id="pendekatan"><option>KBC + Deep Learning</option><option>Deep Learning</option><option>KBC</option><option>STEM</option><option>Saintifik</option></select></div>
+<div class="field"><label>Metode</label><input id="metode" value="Observasi, diskusi, eksperimen, presentasi, refleksi"></div>
+<div class="field"><label>Strategi</label><input id="strategi" value="Kolaboratif, kontekstual, berdiferensiasi"></div>
+</div>
+<h4>8 Dimensi Profil Lulusan</h4><div id="dpl" class="checkgrid"></div>
+<h4>Panca Cinta</h4><div id="cinta" class="checkgrid"></div>
+<h4>Social Emotional Skills</h4><div id="sel" class="checkgrid"></div>
+<div class="field" style="margin-top:14px"><label>Integrasi Ekoteologi-STEM</label><textarea id="stem">Menghubungkan materi dengan kepedulian terhadap ciptaan Allah, penggunaan sumber daya secara bijak, pengamatan lingkungan, pemecahan masalah, dan pemanfaatan teknologi sederhana.</textarea></div>
+</div>
+
+<div class="card"><h3>C. CP, TP dan Pertanyaan Pemantik</h3>
+<div class="field"><label>Capaian Pembelajaran (CP)</label><textarea id="cp"></textarea></div>
+<div class="field"><label>Tujuan Pembelajaran (TP)</label><textarea id="tp"></textarea></div>
+<div class="field"><label>Pertanyaan Pemantik</label><textarea id="pemantik">Mengapa perubahan energi penting dalam kehidupan sehari-hari? Bagaimana kita menggunakan energi secara bijak?</textarea></div>
+<div id="syntaxBox" class="note"></div>
+<div class="actions"><button class="primary" onclick="generate()">Buat Modul Ajar</button><button class="secondary" onclick="example()">Contoh IPAS Kelas 4</button><button class="warning" onclick="resetForm()">Reset</button></div>
+</div>
+</section>
+
+<section id="assessment" class="page">
+<div class="hero"><h1>Generator Asesmen</h1><p>Rancang asesmen yang terhubung dengan tujuan pembelajaran.</p></div>
+<div class="card"><div class="grid">
+<div class="field"><label>Jenis</label><select id="jenisA"><option>Diagnostik</option><option>Formatif</option><option>Sumatif</option></select></div>
+<div class="field"><label>Bentuk</label><select id="bentukA"><option>Observasi</option><option>Unjuk Kerja</option><option>Tes Tertulis</option><option>Proyek</option><option>Produk</option><option>Portofolio</option></select></div>
+</div>
+<div class="field"><label>Tujuan yang Dinilai</label><textarea id="tujuanA">Peserta didik mampu memahami konsep, menerapkan pengetahuan dalam konteks, dan merefleksikan proses pembelajaran.</textarea></div>
+<button class="primary" onclick="assessment()">Buat Rancangan</button>
+<div id="assessmentOut"></div></div>
+</section>
+
+<section id="about" class="page"><div class="hero"><h1>Tentang Aplikasi</h1>
+<p><b>Generator Modul Ajar by Ana Wardani</b> adalah prototipe generator perangkat pembelajaran yang mengintegrasikan Kurikulum Berbasis Cinta, Deep Learning, dan Ekoteologi-STEM.</p>
+<p class="small">Revisi 3.1 • Berbasis HTML lokal • Tidak memerlukan server untuk menjalankan versi prototipe.</p></div></section>
+
+<section id="printPage" class="page"><div id="output" class="result"></div></section>
+</main>
+
 <script>
-const D=['Keimanan dan Ketakwaan kepada Tuhan YME','Kewargaan','Penalaran Kritis','Kreativitas','Kolaborasi','Kemandirian','Kesehatan','Komunikasi'],P=['Cinta Allah dan Rasul-Nya','Cinta Ilmu','Cinta Lingkungan','Cinta Diri dan Sesama Manusia','Cinta Tanah Air'],S=['Kesadaran diri','Manajemen diri','Kesadaran sosial','Keterampilan berelasi','Pengambilan keputusan bertanggung jawab'],M=['Diskusi','Tanya jawab','Presentasi','Praktikum','Demonstrasi','Ceramah','Penugasan','Simulasi','Think Pair Share'];
-function checks(id,a){document.getElementById(id).innerHTML=a.map(x=>`<label><input type="checkbox" value="${x}">${x}</label>`).join('')}
-checks('dpl',D);checks('panca',P);checks('ses',S);checks('methods',M);
-for(let i=1;i<=12;i++)document.getElementById('grade').innerHTML+=`<option>${i}</option>`;
-function phase(g){g=+g;return g<=2?'A':g<=4?'B':g<=6?'C':g<=9?'D':g==10?'E':'F'}document.getElementById('grade').onchange=e=>document.getElementById('phase').value=phase(e.target.value);document.getElementById('grade').dispatchEvent(new Event('change'));
-function show(id){document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');scrollTo(0,0)}
-function selected(id){return [...document.querySelectorAll('#'+id+' input:checked')].map(x=>x.value)}
-function esc(s){return String(s||'').replace(/[&<>]/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[x]))}
-function syn(m){if(m.includes('Project'))return ['Pertanyaan mendasar','Mendesain perencanaan proyek','Menyusun jadwal','Memonitor proyek','Menguji hasil','Evaluasi pengalaman'];if(m.includes('Problem'))return ['Orientasi masalah','Organisasi belajar','Penyelidikan','Mengembangkan dan menyajikan hasil','Analisis dan evaluasi'];if(m.includes('Discovery'))return ['Stimulation','Problem statement','Data collection','Data processing','Verification','Generalization'];if(m.includes('Inquiry'))return ['Orientasi','Merumuskan masalah','Hipotesis','Mengumpulkan data','Menguji hipotesis','Kesimpulan'];return ['Orientasi dan tujuan','Eksplorasi konsep','Kolaborasi/penerapan','Presentasi','Refleksi'];}
-document.getElementById('f').addEventListener('submit',function(e){e.preventDefault();let t=document.getElementById('topic').value,s=document.getElementById('subject').value,g=document.getElementById('grade').value,ph=document.getElementById('phase').value,model=document.getElementById('model').value;let steps=syn(model);let intro=`Peserta didik telah memiliki pengalaman awal yang berkaitan dengan ${t} melalui kehidupan sehari-hari dan pembelajaran sebelumnya. Minat dikembangkan melalui konteks nyata, pengamatan, pertanyaan pemantik, diskusi dan aktivitas langsung. Kebutuhan visual menggunakan gambar/diagram; auditori menggunakan penjelasan dan diskusi; kinestetik menggunakan praktik atau simulasi.`;let cp=`CP ${s} Fase ${ph}: database CP resmi perlu dihubungkan pada build berikutnya agar teks CP tampil lengkap dan persis sesuai sumber.`;document.getElementById('out').innerHTML=`<h1>RENCANA PELAKSANAAN PEMBELAJARAN (RPP)</h1><h2>A. Spesifikasi</h2><table><tr><td>Nama Madrasah</td><td>${esc(school.value)}</td></tr><tr><td>Mata Pelajaran</td><td>${esc(s)}</td></tr><tr><td>Fase/Kelas/Semester</td><td>${ph} / ${g} / ${semester.value}</td></tr><tr><td>Materi</td><td>${esc(t)}</td></tr><tr><td>Alokasi</td><td>${meet.value} pertemuan × ${jp.value} JP × ${dur.value}</td></tr></table><h2>B. Identifikasi</h2><p><b>Peserta didik:</b> ${intro}</p><p><b>Asesmen awal:</b> ${esc(diag.value)||'Tanya jawab diagnostik tentang pengalaman peserta didik terkait materi dan tindak lanjut sesuai hasil.'}</p><p><b>DPL:</b> ${selected('dpl').join(', ')}</p><p><b>Panca Cinta:</b> ${selected('panca').join(', ')||'Tidak dipilih'}</p><p><b>SES:</b> ${selected('ses').join(', ')||'Tidak dipilih'}</p><p><b>Materi Integrasi KBC:</b> ${esc(kbc.value)||'Dikembangkan relevan dengan materi dan Panca Cinta yang dipilih.'}</p><h2>C. Desain Pembelajaran</h2><p><b>CP:</b> ${cp}</p><p><b>Tujuan:</b> Peserta didik mampu memahami konsep ${esc(t)}, menerapkannya pada konteks nyata, dan mengomunikasikan hasil sesuai model ${esc(model)}.</p><p><b>Topik:</b> ${esc(t)}</p><p><b>Lintas disiplin:</b> Bahasa Indonesia, Pendidikan Pancasila, Matematika/teknologi sesuai kebutuhan materi.</p><p><b>Praktik Pedagogis:</b> ${esc(model)}; metode ${selected('methods').join(', ')}; strategi ${esc(strategy.value)||'diferensiasi sesuai kebutuhan'}; pendekatan ${approach.value}.</p><p><b>Kemitraan:</b> ${esc(partner.value)||'Guru, teman sebaya, keluarga dan lingkungan sekitar.'}</p><p><b>Lingkungan:</b> ${esc(env.value)||'Ruang fisik, ruang virtual sederhana dan budaya belajar kolaboratif-reflektif.'}</p><p><b>Digital:</b> ${esc(digital.value)||'Video/animasi, pencarian informasi terarah dan produk digital sederhana.'}</p><h2>D. Pengalaman Belajar</h2><h3>1. Kegiatan Awal</h3><ol><li>Salam dan doa.</li><li>Mengkondisikan kesiapan belajar.</li><li>Apersepsi dan pertanyaan pemantik tentang ${esc(t)}.</li><li>Menyampaikan tujuan, kegiatan dan asesmen.</li></ol><h3>2. Kegiatan Inti — Memahami, Mengaplikasi, Merefleksi</h3><p><b>Memahami:</b> mengamati stimulus, mengidentifikasi informasi, membangun konsep dan berdiskusi.</p><ol>${steps.map(x=>`<li><b>${x}:</b> aktivitas peserta didik dan guru yang relevan dengan ${esc(t)}.</li>`).join('')}</ol><p><b>Diferensiasi konten:</b> visual, lisan, teks, contoh konkret.</p><p><b>Mengaplikasi:</b> menerapkan konsep melalui aktivitas/produk sesuai sintaks model.</p><p><b>Diferensiasi proses:</b> kelompok fleksibel, pilihan bantuan, sumber belajar beragam.</p><p><b>Diferensiasi produk:</b> laporan/poster/demonstrasi/proyek/presentasi sesuai materi.</p><p><b>Merefleksi:</b> peserta didik menjelaskan pemahaman, kesulitan, nilai yang dipelajari dan komitmen tindakan.</p><h3>3. Penutup</h3><ol><li>Kesimpulan bersama.</li><li>Refleksi berkesadaran.</li><li>Informasi kegiatan berikutnya.</li><li>Syukur dan salam.</li></ol><h2>E. Asesmen Pembelajaran</h2><h3>1. Asesmen Proses</h3><p>Observasi, penilaian diri, penilaian sejawat, jurnal, pertanyaan diagnostik dan umpan balik formatif sesuai model.</p><h3>2. Asesmen Akhir</h3><p>Penilaian proyek/produk/kinerja/tes sesuai tujuan dan aktivitas pembelajaran.</p><h3>3. As Learning, For Learning, Of Learning</h3><p>Jurnal reflektif dan self-assessment; observasi dan umpan balik; tes/produk/kinerja.</p><h3>HOTS</h3><ol><li>C3 menerapkan konsep pada situasi nyata.</li><li>C3 menyelesaikan masalah terkait ${esc(t)}.</li><li>C4 menganalisis dua kondisi/solusi.</li><li>C5 mengevaluasi solusi.</li><li>C6 merancang solusi/produk.</li></ol><h2>Lampiran</h2><ol><li>Lembar refleksi.</li><li>Lembar asesmen formatif dalam tabel.</li><li>Rubrik proyek/unjuk kerja/portofolio.</li><li>5 soal HOTS dan pedoman penskoran.</li></ol><table><tr><td>Mengetahui,<br>Kepala Madrasah<br><br>${esc(principal.value)||'........................'}</td><td>Guru Mata Pelajaran<br><br>${esc(author.value)||'Ana Wardani'}</td></tr></table>`});
-function assess(){let t=document.getElementById('atopic').value||'materi';document.getElementById('aout').innerHTML=`<h3>Asesmen ${esc(t)}</h3><p>Diagnostik: pertanyaan awal dan pemetaan miskonsepsi.</p><p>Formatif: observasi, jurnal, self/peer assessment dan umpan balik.</p><p>Sumatif: tes/produk/kinerja.</p><p>HOTS C3–C6: penerapan, analisis, evaluasi, penciptaan.</p>`}
-</script></body></html>
+const CP={
+IPAS:{A:"Peserta didik mengenal diri, lingkungan, benda, energi, makhluk hidup, dan gejala alam melalui pengamatan sederhana.",B:"Peserta didik memahami konsep tentang makhluk hidup, materi, energi, perubahan, lingkungan, serta keterkaitannya dengan kehidupan sehari-hari melalui penyelidikan sederhana.",C:"Peserta didik menganalisis hubungan berbagai konsep sains dan sosial, melakukan penyelidikan, serta menggunakan pengetahuan untuk menghasilkan solusi terhadap masalah di lingkungan."},
+"Bahasa Indonesia":{B:"Peserta didik memahami, mengolah, dan menyampaikan informasi dari teks lisan, tulis, visual, dan audiovisual serta menghasilkan teks sesuai tujuan dan konteks."},
+"Matematika":{B:"Peserta didik memahami dan menggunakan konsep bilangan, pengukuran, geometri, data, serta pola untuk menyelesaikan masalah dalam kehidupan sehari-hari."},
+"Pendidikan Pancasila":{B:"Peserta didik memahami nilai Pancasila, aturan, hak dan kewajiban, keberagaman, serta menunjukkan perilaku sesuai nilai kebersamaan."},
+"Bahasa Jawa":{B:"Peserta didik memahami dan menggunakan bahasa Jawa secara santun dalam komunikasi lisan dan tulis serta mengenal budaya Jawa."},
+"Fikih":{B:"Peserta didik memahami ketentuan dasar fikih dan menerapkannya dalam kehidupan sehari-hari dengan sikap bertanggung jawab."},
+"Al-Qur'an Hadis":{B:"Peserta didik memahami kandungan ayat Al-Qur'an dan hadis pilihan serta menerapkan nilai-nilainya dalam kehidupan."},
+"Akidah Akhlak":{B:"Peserta didik memahami nilai akidah dan akhlak serta membiasakan perilaku terpuji dalam kehidupan sehari-hari."},
+"SKI":{B:"Peserta didik memahami peristiwa penting sejarah kebudayaan Islam dan mengambil ibrah untuk kehidupan."},
+"Bahasa Arab":{B:"Peserta didik memahami kosakata, ungkapan, dan teks sederhana bahasa Arab serta menggunakannya dalam komunikasi sederhana."},
+"English":{B:"Peserta didik memahami dan menggunakan ungkapan serta teks sederhana dalam konteks komunikasi sehari-hari."}};
+const DPL=["Keimanan dan ketakwaan","Kewargaan","Penalaran kritis","Kreativitas","Kolaborasi","Kemandirian","Kesehatan","Komunikasi"];
+const CINTA=["Cinta kepada Allah dan Rasul-Nya","Cinta kepada diri sendiri","Cinta kepada sesama","Cinta kepada lingkungan","Cinta kepada bangsa dan negara"];
+const SEL=["Kesadaran diri","Manajemen diri","Kesadaran sosial","Keterampilan berelasi","Pengambilan keputusan bertanggung jawab"];
+const S={
+"Project Based Learning (PjBL)":["Pertanyaan mendasar","Mendesain perencanaan proyek","Menyusun jadwal","Memonitor proses dan perkembangan proyek","Menguji/menilai hasil","Mengevaluasi pengalaman"],
+"Problem Based Learning (PBL)":["Orientasi peserta didik pada masalah","Mengorganisasi peserta didik untuk belajar","Membimbing penyelidikan","Mengembangkan dan menyajikan hasil","Menganalisis dan mengevaluasi proses pemecahan masalah"],
+"Discovery Learning":["Stimulation","Problem Statement","Data Collection","Data Processing","Verification","Generalization"],
+"Inquiry Based Learning":["Orientasi masalah/pertanyaan","Merumuskan masalah","Merumuskan dugaan/hipotesis","Mengumpulkan dan menganalisis data","Menguji dugaan","Menarik kesimpulan dan refleksi"],
+"Cooperative Learning":["Menyampaikan tujuan dan memotivasi","Menyajikan informasi","Mengorganisasi kelompok","Membimbing kerja kelompok","Evaluasi","Penghargaan/refleksi"],
+"Differentiated Learning":["Asesmen diagnostik","Menetapkan kebutuhan belajar","Merancang diferensiasi konten/proses/produk","Pelaksanaan dan pendampingan","Berbagi hasil","Refleksi dan tindak lanjut"],
+"Contextual Teaching and Learning (CTL)":["Constructivism","Inquiry","Questioning","Learning Community","Modeling","Reflection","Authentic Assessment"],
+"Blended Learning":["Orientasi dan persiapan","Eksplorasi sumber digital","Tatap muka/kolaboratif","Praktik dan penerapan","Berbagi hasil","Refleksi dan evaluasi"],
+"Deep Learning":["Berkesadaran","Bermakna","Mengaplikasikan","Merefleksikan","Tindak lanjut"]};
+function phase(k){k=+k;return k<=2?"A":k<=4?"B":k<=6?"C":k<=9?"D":k==10?"E":"F"}
+function esc(s){return String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function page(id,b){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");if(b){document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active")}window.scrollTo(0,0)}
+function makeChecks(id,a){document.getElementById(id).innerHTML=a.map((x,i)=>`<label class="check"><input type="checkbox" value="${esc(x)}" ${i<3?"checked":""}>${esc(x)}</label>`).join("")}
+function vals(id){return [...document.querySelectorAll("#"+id+" input:checked")].map(x=>x.value)}
+function sync(){let f=phase(document.getElementById("kelas").value);document.getElementById("fase").value=f;let m=document.getElementById("mapel").value;document.getElementById("cp").value=(CP[m]&&CP[m][f])||CP[m]?.B||"CP belum tersedia pada database lokal. Silakan masukkan CP sesuai dokumen kurikulum yang digunakan.";syntax()}
+function syntax(){let m=document.getElementById("model").value;document.getElementById("syntaxBox").innerHTML="<b>Sintaks model:</b> "+S[m].map((x,i)=>`<span class="badge">${i+1}. ${esc(x)}</span>`).join("")}
+makeChecks("dpl",DPL);makeChecks("cinta",CINTA);makeChecks("sel",SEL);sync();
+
+function activity(step,mat,model,i){
+const a=[
+`Guru mengaitkan <b>${esc(mat)}</b> dengan pengalaman nyata. Peserta didik mengamati, menyampaikan pengetahuan awal, dan mengajukan pertanyaan.`,
+`Peserta didik bekerja secara individu/kelompok untuk merancang langkah kegiatan. Guru memberi scaffolding sesuai kebutuhan belajar.`,
+`Peserta didik mengumpulkan informasi melalui observasi, membaca, eksperimen, wawancara, diskusi, atau sumber digital yang relevan.`,
+`Peserta didik mengolah informasi, mencoba solusi/produk, berdiskusi, dan menerima umpan balik dari guru/teman.`,
+`Peserta didik menyajikan hasil, menggunakan bukti untuk menjelaskan keputusan, serta memperbaiki hasil berdasarkan kriteria.`,
+`Peserta didik merefleksikan proses, makna, manfaat, kontribusi, dan rencana penerapan dalam kehidupan sehari-hari.`];
+return a[i%a.length]+` <i>Selaras dengan tahap ${esc(step)} pada ${esc(model)}.</i>`;
+}
+function generate(){
+const v=id=>document.getElementById(id).value,m=v("model"),steps=S[m],mat=v("materi"),mapel=v("mapel"),kelas=v("kelas"),fase=v("fase");
+let tp=v("tp")||`Melalui pembelajaran ${mat}, peserta didik mampu menjelaskan konsep utama, mengaitkannya dengan kehidupan sehari-hari, menerapkan pengetahuan melalui ${m}, dan merefleksikan manfaat pembelajaran.`;
+document.getElementById("tp").value=tp;
+let rows=steps.map((s,i)=>`<tr><td><b>${i+1}. ${esc(s)}</b></td><td>${activity(s,mat,m,i)}</td><td>${i===steps.length-1?"Refleksi/kesimpulan":"Observasi proses, produk, catatan, atau unjuk kerja"}</td></tr>`).join("");
+document.getElementById("output").innerHTML=`
+<h1>MODUL AJAR KURIKULUM BERBASIS CINTA</h1>
+<p><b>${esc(v("madrasah"))}</b> • ${esc(mapel)} • Kelas ${kelas} • Fase ${fase}</p>
+<h2>A. Identitas dan Desain</h2><table><tr><th>Komponen</th><th>Isi</th></tr>
+<tr><td>Materi</td><td>${esc(mat)}</td></tr><tr><td>Semester</td><td>${esc(v("semester"))}</td></tr><tr><td>Alokasi</td><td>${esc(v("alokasi"))}</td></tr><tr><td>Pendekatan</td><td>${esc(v("pendekatan"))}</td></tr><tr><td>Model</td><td>${esc(m)}</td></tr><tr><td>Metode</td><td>${esc(v("metode"))}</td></tr><tr><td>Strategi</td><td>${esc(v("strategi"))}</td></tr></table>
+<h2>B. CP, TP dan Peserta Didik</h2><p><b>CP:</b> ${esc(v("cp"))}</p><p><b>TP:</b> ${esc(tp)}</p><p><b>Kondisi awal:</b> ${esc(v("target"))}</p>
+<h2>C. Integrasi Kurikulum Berbasis Cinta</h2><p><b>DPL:</b> ${vals("dpl").map(x=>`<span class="badge">${esc(x)}</span>`).join("")}</p><p><b>Panca Cinta:</b> ${vals("cinta").map(x=>`<span class="badge">${esc(x)}</span>`).join("")}</p><p><b>SEL:</b> ${vals("sel").map(x=>`<span class="badge">${esc(x)}</span>`).join("")}</p>
+<h2>D. Deep Learning dan Ekoteologi-STEM</h2><p><b>Prinsip:</b> Berkesadaran • Bermakna • Menggembirakan.</p><p><b>Pengalaman:</b> Memahami • Mengaplikasi • Merefleksi.</p><p>${esc(v("stem"))}</p><p><b>Pertanyaan pemantik:</b> ${esc(v("pemantik"))}</p>
+<h2>E. Kegiatan Pembelajaran — Mengikuti Sintaks ${esc(m)}</h2><table><tr><th>Sintaks</th><th>Kegiatan</th><th>Bukti/Asesmen</th></tr>${rows}</table>
+<h2>F. Asesmen</h2><ul><li>Diagnostik: pertanyaan awal/cek pengetahuan prasyarat.</li><li>Formatif: observasi, diskusi, pertanyaan, proses, dan umpan balik.</li><li>Sumatif: produk/performa/tugas sesuai tujuan pembelajaran.</li></ul>
+<h2>G. Diferensiasi</h2><p><b>Konten:</b> sumber visual, teks, contoh konkret, atau sumber pengayaan sesuai kesiapan.</p><p><b>Proses:</b> kelompok fleksibel, scaffolding, pilihan cara bekerja.</p><p><b>Produk:</b> tulisan, lisan, poster, model, produk, atau presentasi sesuai tujuan.</p>
+<h2>H. Remedial dan Pengayaan</h2><p><b>Remedial:</b> penguatan konsep inti melalui contoh konkret dan bimbingan bertahap.</p><p><b>Pengayaan:</b> penerapan pada konteks baru, analisis, atau pengembangan solusi.</p>
+<h2>I. Refleksi dan Tindak Lanjut</h2><p>Peserta didik merefleksikan apa yang dipahami, dilakukan, dirasakan, manfaat pembelajaran, dan perbaikan berikutnya. Guru meninjau bukti asesmen dan menetapkan tindak lanjut.</p>
+<p><b>Penyusun:</b> ${esc(v("guru"))}</p>`;
+page("printPage");}
+function example(){document.getElementById("materi").value="Perubahan Bentuk Energi";document.getElementById("model").value="Project Based Learning (PjBL)";document.getElementById("alokasi").value="2 × 35 menit";document.getElementById("tp").value="Peserta didik mampu mengidentifikasi perubahan bentuk energi, menjelaskan contoh dalam kehidupan sehari-hari, serta menghasilkan karya sederhana yang menunjukkan perubahan energi dan menjelaskan penggunaannya secara bijak.";syntax()}
+function resetForm(){location.reload()}
+function assessment(){let o=document.getElementById("assessmentOut");o.innerHTML=`<div class="result"><h3>Rancangan ${esc(document.getElementById("jenisA").value)}</h3><p><b>Bentuk:</b> ${esc(document.getElementById("bentukA").value)}</p><p><b>Tujuan:</b> ${esc(document.getElementById("tujuanA").value)}</p><ol><li>Tentukan indikator ketercapaian yang dapat diamati.</li><li>Susun instrumen sesuai bentuk asesmen.</li><li>Gunakan kriteria/rubrik yang jelas.</li><li>Catat hasil dan berikan umpan balik.</li><li>Tentukan tindak lanjut remedial atau pengayaan.</li></ol></div>`}
+</script>
+</body></html>

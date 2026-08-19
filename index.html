@@ -36,7 +36,7 @@ input,select,textarea{width:100%;padding:10px 12px;border:1px solid #cbd8ce;bord
 
 <section id="home" class="page active">
 <div class="hero"><h1>Generator Modul Ajar Kurikulum Berbasis Cinta</h1>
-<p>Versi revisi 3.1 untuk membantu guru menyusun modul ajar yang terstruktur, kontekstual, dan selaras dengan model pembelajaran yang dipilih.</p>
+<p>Versi revisi 3.2 untuk membantu guru menyusun modul ajar yang terstruktur, kontekstual, dan selaras dengan model pembelajaran yang dipilih.</p>
 <div class="actions"><button class="primary" onclick="page('generator',document.querySelectorAll('nav button')[1])">Mulai Membuat Modul</button></div></div>
 <div class="grid grid3">
 <div class="card"><b>CP Adaptif</b><p class="small">CP disesuaikan dengan mata pelajaran dan fase.</p></div>
@@ -51,6 +51,7 @@ input,select,textarea{width:100%;padding:10px 12px;border:1px solid #cbd8ce;bord
 <div class="card"><h3>A. Identitas Modul</h3><div class="grid">
 <div class="field"><label>Madrasah/Satuan Pendidikan</label><input id="madrasah" value="MIN 6 Magelang"></div>
 <div class="field"><label>Guru/Penyusun</label><input id="guru" value="Ana Wardani, S.Pd.I"></div>
+<div class="field"><label>Kepala Madrasah</label><input id="kepala" value="Abdul Aziz, S.Ag., MM"></div>
 <div class="field"><label>Mata Pelajaran</label><select id="mapel" onchange="sync()">
 <option>IPAS</option><option>Bahasa Indonesia</option><option>Matematika</option><option>Pendidikan Pancasila</option><option>Bahasa Jawa</option><option>Fikih</option><option>Al-Qur'an Hadis</option><option>Akidah Akhlak</option><option>SKI</option><option>Bahasa Arab</option><option>English</option>
 </select></div>
@@ -60,7 +61,7 @@ input,select,textarea{width:100%;padding:10px 12px;border:1px solid #cbd8ce;bord
 <div class="field"><label>Fase</label><input id="fase" readonly></div>
 <div class="field"><label>Semester</label><select id="semester"><option>Ganjil</option><option>Genap</option></select></div>
 <div class="field"><label>Alokasi Waktu</label><input id="alokasi" value="2 × 35 menit"></div>
-<div class="field"><label>Materi/Topik</label><input id="materi" value="Perubahan Bentuk Energi"></div>
+<div class="field"><label>Materi/Topik</label><input id="materi" value="Perubahan Bentuk Energi" oninput="autoTP()"></div>
 </div>
 <div class="field"><label>Kondisi/Kebutuhan Peserta Didik</label><textarea id="target">Kemampuan dan pengalaman awal peserta didik beragam sehingga diperlukan pembelajaran kontekstual dan berdiferensiasi.</textarea></div>
 </div>
@@ -80,7 +81,7 @@ input,select,textarea{width:100%;padding:10px 12px;border:1px solid #cbd8ce;bord
 </div>
 
 <div class="card"><h3>C. CP, TP dan Pertanyaan Pemantik</h3>
-<div class="field"><label>Capaian Pembelajaran (CP)</label><textarea id="cp"></textarea></div>
+<div class="field"><label>Capaian Pembelajaran (CP)</label><textarea id="cp" oninput="autoTP()"></textarea></div>
 <div class="field"><label>Tujuan Pembelajaran (TP)</label><textarea id="tp"></textarea></div>
 <div class="field"><label>Pertanyaan Pemantik</label><textarea id="pemantik">Mengapa perubahan energi penting dalam kehidupan sehari-hari? Bagaimana kita menggunakan energi secara bijak?</textarea></div>
 <div id="syntaxBox" class="note"></div>
@@ -101,7 +102,7 @@ input,select,textarea{width:100%;padding:10px 12px;border:1px solid #cbd8ce;bord
 
 <section id="about" class="page"><div class="hero"><h1>Tentang Aplikasi</h1>
 <p><b>Generator Modul Ajar by Ana Wardani</b> adalah prototipe generator perangkat pembelajaran yang mengintegrasikan Kurikulum Berbasis Cinta, Deep Learning, dan Ekoteologi-STEM.</p>
-<p class="small">Revisi 3.1 • Berbasis HTML lokal • Tidak memerlukan server untuk menjalankan versi prototipe.</p></div></section>
+<p class="small">Revisi 3.2 • Berbasis HTML lokal • Tidak memerlukan server untuk menjalankan versi prototipe.</p></div></section>
 
 <section id="printPage" class="page"><div id="output" class="result"></div></section>
 </main>
@@ -137,9 +138,31 @@ function esc(s){return String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt
 function page(id,b){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");if(b){document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active")}window.scrollTo(0,0)}
 function makeChecks(id,a){document.getElementById(id).innerHTML=a.map((x,i)=>`<label class="check"><input type="checkbox" value="${esc(x)}" ${i<3?"checked":""}>${esc(x)}</label>`).join("")}
 function vals(id){return [...document.querySelectorAll("#"+id+" input:checked")].map(x=>x.value)}
-function sync(){let f=phase(document.getElementById("kelas").value);document.getElementById("fase").value=f;let m=document.getElementById("mapel").value;document.getElementById("cp").value=(CP[m]&&CP[m][f])||CP[m]?.B||"CP belum tersedia pada database lokal. Silakan masukkan CP sesuai dokumen kurikulum yang digunakan.";syntax()}
+function sync(){
+let f=phase(document.getElementById("kelas").value);
+document.getElementById("fase").value=f;
+let m=document.getElementById("mapel").value;
+document.getElementById("cp").value=(CP[m]&&CP[m][f])||CP[m]?.B||"CP belum tersedia pada database lokal. Silakan masukkan CP sesuai dokumen kurikulum yang digunakan.";
+autoTP();
+syntax()
+}
+let tpManual=false;
+function autoTP(){
+const cp=document.getElementById("cp").value.trim();
+const materi=document.getElementById("materi").value.trim();
+const mapel=document.getElementById("mapel").value;
+const kelas=document.getElementById("kelas").value;
+if(!materi) return;
+const lower=cp.toLowerCase();
+let verbs=[];
+if(/menganalisis|menjelaskan|memahami|menggunakan|mengolah|menyampaikan|menerapkan/.test(lower)) verbs=["mengidentifikasi","menjelaskan","menerapkan"];
+else verbs=["mengidentifikasi","memahami","menerapkan"];
+document.getElementById("tp").value=
+`Setelah mengikuti pembelajaran ${mapel} kelas ${kelas} tentang ${materi}, peserta didik mampu `+
+`${verbs[0]} konsep/fakta utama terkait ${materi}; ${verbs[1]} keterkaitan ${materi} dengan konteks kehidupan sehari-hari berdasarkan Capaian Pembelajaran; dan ${verbs[2]} pengetahuan tersebut melalui kegiatan penyelidikan, pemecahan masalah, proyek, atau produk sesuai model pembelajaran yang dipilih, serta merefleksikan manfaatnya secara bertanggung jawab.`;
+}
 function syntax(){let m=document.getElementById("model").value;document.getElementById("syntaxBox").innerHTML="<b>Sintaks model:</b> "+S[m].map((x,i)=>`<span class="badge">${i+1}. ${esc(x)}</span>`).join("")}
-makeChecks("dpl",DPL);makeChecks("cinta",CINTA);makeChecks("sel",SEL);sync();
+makeChecks("dpl",DPL);makeChecks("cinta",CINTA);makeChecks("sel",SEL);sync();autoTP();
 
 function activity(step,mat,model,i){
 const a=[
@@ -153,7 +176,7 @@ return a[i%a.length]+` <i>Selaras dengan tahap ${esc(step)} pada ${esc(model)}.<
 }
 function generate(){
 const v=id=>document.getElementById(id).value,m=v("model"),steps=S[m],mat=v("materi"),mapel=v("mapel"),kelas=v("kelas"),fase=v("fase");
-let tp=v("tp")||`Melalui pembelajaran ${mat}, peserta didik mampu menjelaskan konsep utama, mengaitkannya dengan kehidupan sehari-hari, menerapkan pengetahuan melalui ${m}, dan merefleksikan manfaat pembelajaran.`;
+let tp=v("tp")||`Setelah mengikuti pembelajaran ${mapel} kelas ${kelas} tentang ${mat}, peserta didik mampu mengidentifikasi konsep utama, menjelaskan keterkaitannya dengan kehidupan sehari-hari berdasarkan CP, menerapkan pengetahuan melalui ${m}, dan merefleksikan manfaat pembelajaran.`;
 document.getElementById("tp").value=tp;
 let rows=steps.map((s,i)=>`<tr><td><b>${i+1}. ${esc(s)}</b></td><td>${activity(s,mat,m,i)}</td><td>${i===steps.length-1?"Refleksi/kesimpulan":"Observasi proses, produk, catatan, atau unjuk kerja"}</td></tr>`).join("");
 document.getElementById("output").innerHTML=`
@@ -169,9 +192,9 @@ document.getElementById("output").innerHTML=`
 <h2>G. Diferensiasi</h2><p><b>Konten:</b> sumber visual, teks, contoh konkret, atau sumber pengayaan sesuai kesiapan.</p><p><b>Proses:</b> kelompok fleksibel, scaffolding, pilihan cara bekerja.</p><p><b>Produk:</b> tulisan, lisan, poster, model, produk, atau presentasi sesuai tujuan.</p>
 <h2>H. Remedial dan Pengayaan</h2><p><b>Remedial:</b> penguatan konsep inti melalui contoh konkret dan bimbingan bertahap.</p><p><b>Pengayaan:</b> penerapan pada konteks baru, analisis, atau pengembangan solusi.</p>
 <h2>I. Refleksi dan Tindak Lanjut</h2><p>Peserta didik merefleksikan apa yang dipahami, dilakukan, dirasakan, manfaat pembelajaran, dan perbaikan berikutnya. Guru meninjau bukti asesmen dan menetapkan tindak lanjut.</p>
-<p><b>Penyusun:</b> ${esc(v("guru"))}</p>`;
+<p><b>Penyusun:</b> ${esc(v("guru"))}</p><p><b>Kepala Madrasah:</b> ${esc(v("kepala"))}</p><div style="margin-top:50px;display:grid;grid-template-columns:1fr 1fr;gap:80px"><div>Mengetahui,<br>Kepala Madrasah<br><br><br><b>${esc(v("kepala"))}</b></div><div>Guru/Penyusun<br><br><br><br><b>${esc(v("guru"))}</b></div></div>`;
 page("printPage");}
-function example(){document.getElementById("materi").value="Perubahan Bentuk Energi";document.getElementById("model").value="Project Based Learning (PjBL)";document.getElementById("alokasi").value="2 × 35 menit";document.getElementById("tp").value="Peserta didik mampu mengidentifikasi perubahan bentuk energi, menjelaskan contoh dalam kehidupan sehari-hari, serta menghasilkan karya sederhana yang menunjukkan perubahan energi dan menjelaskan penggunaannya secara bijak.";syntax()}
+function example(){document.getElementById("materi").value="Perubahan Bentuk Energi";document.getElementById("model").value="Project Based Learning (PjBL)";document.getElementById("alokasi").value="2 × 35 menit";autoTP();syntax()}
 function resetForm(){location.reload()}
 function assessment(){let o=document.getElementById("assessmentOut");o.innerHTML=`<div class="result"><h3>Rancangan ${esc(document.getElementById("jenisA").value)}</h3><p><b>Bentuk:</b> ${esc(document.getElementById("bentukA").value)}</p><p><b>Tujuan:</b> ${esc(document.getElementById("tujuanA").value)}</p><ol><li>Tentukan indikator ketercapaian yang dapat diamati.</li><li>Susun instrumen sesuai bentuk asesmen.</li><li>Gunakan kriteria/rubrik yang jelas.</li><li>Catat hasil dan berikan umpan balik.</li><li>Tentukan tindak lanjut remedial atau pengayaan.</li></ol></div>`}
 </script>

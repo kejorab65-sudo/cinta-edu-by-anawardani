@@ -1,26 +1,22 @@
-CINTA EDU v1.2 — by Ana Wardani, S.Pd.I.
-Perubahan utama:
-1. CP Engine terstruktur dari BSKAP 046/H/AN/2025 untuk mapel umum.
-2. Pemetaan otomatis kelas -> fase -> mapel -> CP.
-3. Registry regulasi: BSKAP 046/H/AN/2025, SK Dirjen Pendis 9941/2025, Kepdirjen Pendis 6077/2025.
-4. PAI/Bahasa Arab belum diisi teks CP agar aplikasi tidak mengarang. Statusnya ditandai sebagai sumber Kemenag 9941/2025.
-5. Sintaks model tetap menjadi constraint generator.
-6. Panca Cinta, SES, 8 Dimensi Profil Lulusan, target peserta didik, dan metode terhubung ke generator.
+GENERATOR MODUL AJAR BY ANA WARDANI — REVISI 3.1
 
+Cara menggunakan:
+1. Ekstrak ZIP.
+2. Buka index.html menggunakan Chrome/Edge/Firefox.
+3. Pilih Generate Modul Ajar.
+4. Isi identitas dan komponen.
+5. Pilih model pembelajaran.
+6. Pastikan kegiatan yang muncul mengikuti sintaks model.
+7. Klik Buat Modul Ajar.
+8. Gunakan Ctrl+P untuk mencetak atau Save as PDF.
 
-v1.3 ASSESSMENT ENGINE:
-- Menu Generate Asesmen mandiri atau dari Modul Ajar.
-- Diagnostik, Formatif, Sumatif.
-- Bentuk objektif, uraian, praktik, proyek, portofolio, observasi, refleksi.
-- Kisi-kisi terhubung TP/indikator.
-- Profil Lulusan, Panca Cinta, SES.
-- Rubrik untuk asesmen kinerja.
-- Cetak/Simpan PDF.
-
-
-v1.4 QUESTION ENGINE:
-- Spesifikasi bank soal: komposisi kognitif, konteks, opsi PG, acak.
-- Template per bentuk asesmen.
-- Kisi-kisi dan keterlacakan indikator.
-- Kunci/pedoman dan rubrik umum.
-- Verifikasi guru wajib sebelum asesmen digunakan.
+Fitur:
+- Fase otomatis A-F.
+- CP lokal berdasarkan mapel dan fase.
+- 8 Dimensi Profil Lulusan termasuk Kesehatan.
+- Panca Cinta.
+- Social Emotional Skills.
+- Prinsip dan pengalaman Deep Learning.
+- Integrasi Ekoteologi-STEM.
+- 9 model pembelajaran dengan sintaks masing-masing.
+- Generator asesmen.

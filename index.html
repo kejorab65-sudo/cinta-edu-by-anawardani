@@ -102,7 +102,7 @@ input,select,textarea{width:100%;padding:10px 12px;border:1px solid #cbd8ce;bord
 
 <section id="about" class="page"><div class="hero"><h1>Tentang Aplikasi</h1>
 <p><b>Generator Modul Ajar by Ana Wardani</b> adalah prototipe generator perangkat pembelajaran yang mengintegrasikan Kurikulum Berbasis Cinta, Deep Learning, dan Ekoteologi-STEM.</p>
-<p class="small">Revisi 3.2 • Berbasis HTML lokal • Tidak memerlukan server untuk menjalankan versi prototipe.</p></div></section>
+<p class="small">Revisi 3.3 • Berbasis HTML lokal • Tidak memerlukan server untuk menjalankan versi prototipe.</p></div></section>
 
 <section id="printPage" class="page"><div id="output" class="result"></div></section>
 </main>
@@ -152,17 +152,22 @@ const cp=document.getElementById("cp").value.trim();
 const materi=document.getElementById("materi").value.trim();
 const mapel=document.getElementById("mapel").value;
 const kelas=document.getElementById("kelas").value;
+const fase=document.getElementById("fase").value;
 if(!materi) return;
+const cinta=vals("cinta"), sel=vals("sel"), dpl=vals("dpl");
+const cintaText=cinta.length?cinta.slice(0,2).join(" dan "):"cinta kepada Allah, diri sendiri, sesama, lingkungan, dan bangsa";
+const selText=sel.length?sel.slice(0,2).join(" dan "):"kesadaran diri dan keterampilan berelasi";
+const dplText=dpl.length?dpl.slice(0,2).join(" dan "):"penalaran kritis dan kolaborasi";
 const lower=cp.toLowerCase();
-let verbs=[];
-if(/menganalisis|menjelaskan|memahami|menggunakan|mengolah|menyampaikan|menerapkan/.test(lower)) verbs=["mengidentifikasi","menjelaskan","menerapkan"];
-else verbs=["mengidentifikasi","memahami","menerapkan"];
+let kko="mengidentifikasi, menjelaskan, dan menerapkan";
+if(/menganalisis|menilai|mengevaluasi|menghasilkan solusi/.test(lower)) kko="mengidentifikasi, menganalisis, mengevaluasi, dan menghasilkan solusi";
+else if(/menghasilkan|menciptakan|merancang/.test(lower)) kko="mengidentifikasi, menjelaskan, merancang, dan menghasilkan";
+else if(/menggunakan|mengolah|menyampaikan/.test(lower)) kko="mengidentifikasi, menjelaskan, menggunakan, dan menyampaikan";
 document.getElementById("tp").value=
-`Setelah mengikuti pembelajaran ${mapel} kelas ${kelas} tentang ${materi}, peserta didik mampu `+
-`${verbs[0]} konsep/fakta utama terkait ${materi}; ${verbs[1]} keterkaitan ${materi} dengan konteks kehidupan sehari-hari berdasarkan Capaian Pembelajaran; dan ${verbs[2]} pengetahuan tersebut melalui kegiatan penyelidikan, pemecahan masalah, proyek, atau produk sesuai model pembelajaran yang dipilih, serta merefleksikan manfaatnya secara bertanggung jawab.`;
+`Setelah mengikuti pembelajaran ${mapel} kelas ${kelas} fase ${fase} tentang ${materi}, peserta didik mampu ${kko} konsep/pengetahuan yang terkait dengan ${materi} sesuai Capaian Pembelajaran; menerapkan pengetahuan tersebut dalam konteks kehidupan sehari-hari melalui kegiatan yang bermakna; menunjukkan sikap ${cintaText} melalui perilaku nyata selama proses pembelajaran; mengembangkan ${selText} dalam bekerja, berkomunikasi, dan mengambil keputusan; serta menguatkan ${dplText} melalui kegiatan individu maupun kolaboratif.`;
 }
 function syntax(){let m=document.getElementById("model").value;document.getElementById("syntaxBox").innerHTML="<b>Sintaks model:</b> "+S[m].map((x,i)=>`<span class="badge">${i+1}. ${esc(x)}</span>`).join("")}
-makeChecks("dpl",DPL);makeChecks("cinta",CINTA);makeChecks("sel",SEL);sync();autoTP();
+makeChecks("dpl",DPL);makeChecks("cinta",CINTA);makeChecks("sel",SEL);document.querySelectorAll("#dpl input,#cinta input,#sel input").forEach(x=>x.addEventListener("change",autoTP));sync();autoTP();
 
 function activity(step,mat,model,i){
 const a=[
@@ -185,7 +190,7 @@ document.getElementById("output").innerHTML=`
 <h2>A. Identitas dan Desain</h2><table><tr><th>Komponen</th><th>Isi</th></tr>
 <tr><td>Materi</td><td>${esc(mat)}</td></tr><tr><td>Semester</td><td>${esc(v("semester"))}</td></tr><tr><td>Alokasi</td><td>${esc(v("alokasi"))}</td></tr><tr><td>Pendekatan</td><td>${esc(v("pendekatan"))}</td></tr><tr><td>Model</td><td>${esc(m)}</td></tr><tr><td>Metode</td><td>${esc(v("metode"))}</td></tr><tr><td>Strategi</td><td>${esc(v("strategi"))}</td></tr></table>
 <h2>B. CP, TP dan Peserta Didik</h2><p><b>CP:</b> ${esc(v("cp"))}</p><p><b>TP:</b> ${esc(tp)}</p><p><b>Kondisi awal:</b> ${esc(v("target"))}</p>
-<h2>C. Integrasi Kurikulum Berbasis Cinta</h2><p><b>DPL:</b> ${vals("dpl").map(x=>`<span class="badge">${esc(x)}</span>`).join("")}</p><p><b>Panca Cinta:</b> ${vals("cinta").map(x=>`<span class="badge">${esc(x)}</span>`).join("")}</p><p><b>SEL:</b> ${vals("sel").map(x=>`<span class="badge">${esc(x)}</span>`).join("")}</p>
+<h2>C. Integrasi Kurikulum Berbasis Cinta</h2><p><b>Insersi KBC dalam TP:</b> TP otomatis mengintegrasikan CP dan materi dengan Panca Cinta, Social Emotional Skills, serta dimensi profil lulusan yang dipilih guru.</p><p><b>DPL:</b> ${vals("dpl").map(x=>`<span class="badge">${esc(x)}</span>`).join("")}</p><p><b>Panca Cinta:</b> ${vals("cinta").map(x=>`<span class="badge">${esc(x)}</span>`).join("")}</p><p><b>SEL:</b> ${vals("sel").map(x=>`<span class="badge">${esc(x)}</span>`).join("")}</p>
 <h2>D. Deep Learning dan Ekoteologi-STEM</h2><p><b>Prinsip:</b> Berkesadaran • Bermakna • Menggembirakan.</p><p><b>Pengalaman:</b> Memahami • Mengaplikasi • Merefleksi.</p><p>${esc(v("stem"))}</p><p><b>Pertanyaan pemantik:</b> ${esc(v("pemantik"))}</p>
 <h2>E. Kegiatan Pembelajaran — Mengikuti Sintaks ${esc(m)}</h2><table><tr><th>Sintaks</th><th>Kegiatan</th><th>Bukti/Asesmen</th></tr>${rows}</table>
 <h2>F. Asesmen</h2><ul><li>Diagnostik: pertanyaan awal/cek pengetahuan prasyarat.</li><li>Formatif: observasi, diskusi, pertanyaan, proses, dan umpan balik.</li><li>Sumatif: produk/performa/tugas sesuai tujuan pembelajaran.</li></ul>
